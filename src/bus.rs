@@ -737,8 +737,9 @@ impl<USB: UsbPeripheral> usb_device::bus::UsbBus for UsbBus<USB> {
                                     .fill_from_fifo(*regs, data_size as u16, is_setup)
                                     .ok();
 
-                                // Re-enable the endpoint, F446-like chips only
-                                if core_id == 0x0000_2000
+                                // Re-enable the endpoint, F446-like chips and STM32F469
+                                if core_id == 0x0000_1200  // STM32F469 needs re-enablement
+                                    || core_id == 0x0000_2000
                                     || core_id == 0x0000_2100
                                     || core_id == 0x0000_2300
                                     || core_id == 0x0000_3000
