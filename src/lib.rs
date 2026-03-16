@@ -1,6 +1,11 @@
 //! USB peripheral driver for Synopsys USB OTG peripherals.
 
 #![no_std]
+// Suppress warnings for cfg features (nosync, rtfm) used in generated RAL code
+#![allow(unexpected_cfgs)]
+// Suppress warnings for unused imports and dead code in generated RAL code
+#![allow(unused_imports)]
+#![allow(dead_code)]
 
 #[cfg(all(feature = "fs", feature = "hs"))]
 compile_error!("choose only one USB mode");
